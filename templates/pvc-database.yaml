@@ -3,6 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   annotations:
   name: doyoueventrack-database
+labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   accessModes:
   - ReadWriteOnce

@@ -1,26 +1,9 @@
 ﻿apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  creationTimestamp: null
-  generation: 1
-  labels:
-    cattle.io/creator: norman
-  managedFields:
-  - apiVersion: networking.k8s.io/v1beta1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:status:
-        f:loadBalancer:
-          f:ingress: {}
-    manager: nginx-ingress-controller
-    operation: Update
-    time: "2021-01-30T13:23:58Z"
-  - apiVersion: extensions/v1beta1
-    manager: rancher
-    operation: Update
-    time: "2021-01-30T13:23:59Z"
   name: landing
-  selfLink: /apis/extensions/v1beta1/namespaces/prod/ingresses/doyoueventrack.app
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   rules:
   - host: doyoueventrack.app
@@ -30,5 +13,3 @@ spec:
           serviceName: landing
           servicePort: 80
         pathType: ImplementationSpecific
-status:
-  loadBalancer: {}

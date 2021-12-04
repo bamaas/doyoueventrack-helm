@@ -1,20 +1,15 @@
 ﻿apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  generation: 1
-  managedFields:
-    manager: nginx-ingress-controller
-    operation: Update
-  - apiVersion: extensions/v1beta1
-    manager: rancher
-    operation: Update
-  name: api
+  name: listmonk
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   rules:
-  - host: api.doyoueventrack.app
+  - host: listmonk.doyoueventrack.app
     http:
       paths:
       - backend:
-          serviceName: backend
-          servicePort: 5000
+          serviceName: listmonk
+          servicePort: 9000
         pathType: ImplementationSpecific

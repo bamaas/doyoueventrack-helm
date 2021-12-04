@@ -4,6 +4,7 @@ metadata:
   name: iam
   labels:
     app: iam
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   replicas: 1
   selector:

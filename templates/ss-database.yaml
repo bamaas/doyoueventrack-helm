@@ -4,6 +4,7 @@ metadata:
   generation: 1
   labels:
     app: database
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
   name: database
 spec:
   podManagementPolicy: OrderedReady

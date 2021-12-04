@@ -1,59 +1,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  generation: 1
-  labels:
-    app: landing
-  name: landing
+  name: listmonk
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: landing
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
     type: RollingUpdate
   template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: landing
     spec:
       containers:
-      - image: bamaas/fullstackfit_landing:latest
-        imagePullPolicy: Always
-        livenessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 20
-          periodSeconds: 2
-          successThreshold: 1
-          tcpSocket:
-            port: 80
-          timeoutSeconds: 2
-        name: landing
-        resources:
-          requests:
-            memory: "5Mi"
-            cpu: "5m"
-          limits:
-            memory: "50Mi"
-            cpu: "10m"
+      - args:
+        - sh
+        - -c
+        - ./listmonk
+        env:
+        - name: LISTMONK_app__address
+          value: 0.0.0.0:9000
+        - name: LISTMONK_app__admin_password
+          value: admin
+        - name: LISTMONK_app__admin_username
+          value: admin
+        - name: LISTMONK_db__database
+          value: listmonk
+        - name: LISTMONK_db__db
+          value: listmonk
+        - name: LISTMONK_db__host
+          value: database
+        - name: LISTMONK_db__password
+          value: postgres
+        - name: LISTMONK_db__ssl_mode
+          value: disable
+        - name: LISTMONK_db__user
+          value: postgres
+        image: "{{ .Values.listmonk.image.repository }}:{{ .Values.listmonk.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.listmonk.image.pullPolicy }}
+        name: listmonk
         ports:
-        - containerPort: 80
-          name: landing80tcp
+        - containerPort: 9000
+          name: 9000tcp01
           protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 20
-          periodSeconds: 2
-          successThreshold: 2
-          tcpSocket:
-            port: 80
-          timeoutSeconds: 2
+        - containerPort: 9000
+          name: 80tcp01
+          protocol: TCP
+        resources: {}
         securityContext:
           allowPrivilegeEscalation: false
           privileged: false
@@ -64,6 +57,3 @@ spec:
         terminationMessagePolicy: File
         tty: true
       dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      terminationGracePeriodSeconds: 30

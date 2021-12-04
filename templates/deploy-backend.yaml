@@ -24,8 +24,8 @@ spec:
         app: backend
     spec:
       containers:
-      - image: bamaas/fullstackfit_backend:latest
-        imagePullPolicy: Always
+      - image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 4
           initialDelaySeconds: 53

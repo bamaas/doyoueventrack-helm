@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: iam
-        image: bamaas/fullstackfit_iam:latest
+        image: "{{ .Values.iam.image.repository }}:{{ .Values.iam.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.iam.image.pullPolicy }}
         env:
         - name: KEYCLOAK_USER
           value: "keycloakuser"

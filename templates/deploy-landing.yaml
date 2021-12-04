@@ -24,8 +24,8 @@ spec:
         app: landing
     spec:
       containers:
-      - image: bamaas/fullstackfit_landing:latest
-        imagePullPolicy: Always
+      - image: "{{ .Values.landing.image.repository }}:{{ .Values.landing.image.tag }}"
+        imagePullPolicy: {{ .Values.landing.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 20

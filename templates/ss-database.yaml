@@ -19,13 +19,13 @@ spec:
         app: database
     spec:
       containers:
-      - env:
-        - name: POSTGRES_PASSWORD
-          value: postgres
+      - image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+        env:
         - name: POSTGRES_USER
           value: postgres
-        image: bamaas/fullstackfit_database:latest
-        imagePullPolicy: Always
+        - name: POSTGRES_PASSWORD
+          value: postgres
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 20
@@ -64,10 +64,9 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
       volumes:
-      - hostPath:
-          path: /home/bas/rancher/prod/volumes/database
-          type: DirectoryOrCreate
-        name: vol1
+      - name: doyoueventrack-database
+        persistentVolumeClaim:
+          claimName: doyoueventrack-database
   updateStrategy:
     type: RollingUpdate
 status:

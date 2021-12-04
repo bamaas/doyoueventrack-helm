@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: listmonk
 spec:
   ports:
-  - name: backendport-backend
-    port: 5000
+  - name: listmonkport-listmonk
+    port: 9000
     protocol: TCP
-    targetPort: 5000
+    targetPort: 9000
   selector:
-    app: backend
+    app: listmonk
   sessionAffinity: None
   type: ClusterIP

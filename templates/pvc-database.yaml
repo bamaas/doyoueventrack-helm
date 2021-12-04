@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   annotations:
   name: doyoueventrack-database
-labels:
+  labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   accessModes:
@@ -11,7 +11,7 @@ spec:
   resources:
     requests:
       storage: 512Mi
-  storageClassName: longhorn
+  storageClassName: {{ .Values.database.persistentVolume.storageClassName }}
   volumeMode: Filesystem
 status:
   accessModes:

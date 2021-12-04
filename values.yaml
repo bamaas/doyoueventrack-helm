@@ -18,7 +18,8 @@ database:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-  storageClassName: longhorn
+  persistentVolume:
+    storageClassName: longhorn
 
 iam:
   image:
@@ -27,7 +28,7 @@ iam:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-landingpage:
+landing:
   enabled: true
   image:
     repository: bamaas/fullstackfit_landing

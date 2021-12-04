@@ -1,3 +1,4 @@
+{{- if .Values.listmonk.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +6,9 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
+  selector:
+    matchLabels:
+      app: listmonk
   progressDeadlineSeconds: 600
   replicas: 1
   strategy:
@@ -58,3 +62,4 @@ spec:
         terminationMessagePolicy: File
         tty: true
       dnsPolicy: ClusterFirst
+{{- end }}

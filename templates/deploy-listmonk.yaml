@@ -49,9 +49,6 @@ spec:
         - containerPort: 9000
           name: 9000tcp01
           protocol: TCP
-        - containerPort: 9000
-          name: 80tcp01
-          protocol: TCP
         securityContext:
           allowPrivilegeEscalation: false
           privileged: false

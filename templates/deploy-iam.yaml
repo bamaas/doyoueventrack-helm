@@ -27,7 +27,7 @@ spec:
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
         - name: KEYCLOAK_FRONTEND_URL
-          value: "https://auth.doyoueventrack.app/auth"
+          value: "https://{{ .Values.iam.ingress.host }}/auth"
         - name: DB_VENDOR
           value: "postgres"
         - name: DB_USER

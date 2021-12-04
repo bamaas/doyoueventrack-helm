@@ -1,15 +1,15 @@
 ﻿apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: auth
+  name: frontend
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   rules:
-  - host: auth.doyoueventrack.app
+  - host: {{ .Values.frontend.ingress.host }}
     http:
       paths:
       - backend:
-          serviceName: iam
-          servicePort: 8080
+          serviceName: frontend
+          servicePort: 4200
         pathType: ImplementationSpecific

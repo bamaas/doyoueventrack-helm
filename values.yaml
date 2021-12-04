@@ -1,9 +1,21 @@
+landing:
+  enabled: true
+  image:
+    repository: bamaas/fullstackfit_landing
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+  ingress:
+    host: doyoueventrack.app
+    
 frontend:
   image:
     repository: bamaas/fullstackfit_frontend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  ingress:
+    host: bro.doyoueventrack.app
 
 backend:
   image:
@@ -11,6 +23,8 @@ backend:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  ingress:
+    host: api.doyoueventrack.app
 
 database:
   image:
@@ -27,14 +41,8 @@ iam:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-
-landing:
-  enabled: true
-  image:
-    repository: bamaas/fullstackfit_landing
-    pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+  ingress:
+    host: auth.doyoueventrack.app
 
 listmonk:
   enabled: true
@@ -42,3 +50,5 @@ listmonk:
     repository: listmonk/listmonk
     pullPolicy: IfNotPresent
     tag: "v2.0.0"
+  ingress:
+    host: newsletter.doyoueventrack.app

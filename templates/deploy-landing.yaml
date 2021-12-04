@@ -26,6 +26,15 @@ spec:
       containers:
       - image: "{{ .Values.landing.image.repository }}:{{ .Values.landing.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.landing.image.pullPolicy }}
+        command:
+          - sh
+          - -c
+          - |
+            IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
+            REDIRECT_URL=$(echo {{ .Values.frontend.ingress.host }} | sed 's/\./\\./g')
+            sed -i "s/bro\.doyoueventrack\.app/${IAM_URL}/g" /usr/share/nginx/public_html/index.html
+            sed -i "s/auth\.doyoueventrack\.app/${REDIRECT_URL}/g" /usr/share/nginx/public_html/index.html
+            nginx -g 'daemon off;'
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 20

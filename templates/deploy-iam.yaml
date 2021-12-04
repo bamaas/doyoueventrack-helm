@@ -19,6 +19,14 @@ spec:
       - name: iam
         image: "{{ .Values.iam.image.repository }}:{{ .Values.iam.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.iam.image.pullPolicy }}
+        command:
+          - sh
+          - -c
+          - |
+            IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
+            sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
+            sed -i "s/thiswillebereplaced/bythis/g" /tmp/realm-export.json
+            /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0
         env:
         - name: KEYCLOAK_USER
           valueFrom:

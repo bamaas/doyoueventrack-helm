@@ -49,6 +49,18 @@ iam:
   adminCredentials:
     username: iamusername
     password: iampassword
+  smtpServer:
+    password: "smtpServerPassword"
+    replyToDisplayName: "No-reply | FitTrack"
+    starttls: "true"
+    auth: "true"
+    port: "465"
+    host: "smtpServerHost"
+    replyTo: "no-reply@basmaas.nl"
+    from: "no-reply@basmaas.nl"
+    fromDisplayName: "FitTrack"
+    ssl: "true"
+    user: "smtpServerUser"
 
 listmonk:
   enabled: false

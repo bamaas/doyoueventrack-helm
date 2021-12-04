@@ -31,9 +31,9 @@ spec:
           - -c
           - |
             IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
-            REDIRECT_URL=$(echo {{ .Values.frontend.ingress.host }} | sed 's/\./\\./g')
-            sed -i "s/bro\.doyoueventrack\.app/${IAM_URL}/g" /usr/share/nginx/public_html/index.html
-            sed -i "s/auth\.doyoueventrack\.app/${REDIRECT_URL}/g" /usr/share/nginx/public_html/index.html
+            FRONTEND_URL=$(echo {{ .Values.frontend.ingress.host }} | sed 's/\./\\./g')
+            sed -i "s/bro\.doyoueventrack\.app/${FRONTEND_URL}/g" /usr/share/nginx/public_html/index.html
+            sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /usr/share/nginx/public_html/index.html
             nginx -g 'daemon off;'
         livenessProbe:
           failureThreshold: 3

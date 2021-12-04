@@ -6,8 +6,8 @@ landing:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
-    host: doyoueventrack.app
-    
+    host: gymtrack.nl
+
 frontend:
   image:
     repository: bamaas/fullstackfit_frontend
@@ -15,7 +15,7 @@ frontend:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
-    host: bro.doyoueventrack.app
+    host: bro.gymtrack.nl
 
 backend:
   image:
@@ -24,7 +24,7 @@ backend:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
-    host: api.doyoueventrack.app
+    host: api.gymtrack.nl
 
 database:
   image:
@@ -34,6 +34,9 @@ database:
     tag: ""
   persistentVolume:
     storageClassName: longhorn
+  credentials:
+    username: postgres
+    password: postgres
 
 iam:
   image:
@@ -42,7 +45,7 @@ iam:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
-    host: auth.doyoueventrack.app
+    host: auth.gymtrack.nl
 
 listmonk:
   enabled: true
@@ -51,4 +54,4 @@ listmonk:
     pullPolicy: IfNotPresent
     tag: "v2.0.0"
   ingress:
-    host: newsletter.doyoueventrack.app
+    host: newsletter.gymtrack.nl

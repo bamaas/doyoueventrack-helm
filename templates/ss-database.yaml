@@ -24,9 +24,15 @@ spec:
         imagePullPolicy: {{ .Values.database.image.pullPolicy }}
         env:
         - name: POSTGRES_USER
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: USERNAME
         - name: POSTGRES_PASSWORD
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: PASSWORD
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 20

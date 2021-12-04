@@ -15,7 +15,7 @@ frontend:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
-    host: bro.gymtrack.nl
+    host: app.gymtrack.nl
 
 backend:
   image:
@@ -51,7 +51,7 @@ iam:
     password: iampassword
 
 listmonk:
-  enabled: true
+  enabled: false
   image:
     repository: listmonk/listmonk
     pullPolicy: IfNotPresent

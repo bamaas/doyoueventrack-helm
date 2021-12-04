@@ -24,7 +24,7 @@ spec:
         app: landing
     spec:
       containers:
-      - image: "{{ .Values.landing.image.repository }}:{{ .Values.landing.image.tag }}"
+      - image: "{{ .Values.landing.image.repository }}:{{ .Values.landing.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.landing.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 3

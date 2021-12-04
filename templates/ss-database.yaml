@@ -65,7 +65,8 @@ spec:
         tty: true
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
-          name: vol1
+          name: doyoueventrack-database
+          subPath: doyoueventrack
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

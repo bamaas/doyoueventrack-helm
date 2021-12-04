@@ -6,7 +6,7 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   rules:
-  - host: api.doyoueventrack.app
+  - host: {{ .Values.backend.ingress.host }}
     http:
       paths:
       - backend:

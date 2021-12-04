@@ -46,6 +46,9 @@ iam:
     tag: ""
   ingress:
     host: auth.gymtrack.nl
+  adminCredentials:
+    username: iamusername
+    password: iampassword
 
 listmonk:
   enabled: true

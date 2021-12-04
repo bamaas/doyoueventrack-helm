@@ -21,9 +21,15 @@ spec:
         imagePullPolicy: {{ .Values.iam.image.pullPolicy }}
         env:
         - name: KEYCLOAK_USER
-          value: "keycloakuser"
+          valueFrom:
+            secretKeyRef:
+              name: iam
+              key: USERNAME
         - name: KEYCLOAK_PASSWORD
-          value: "keycloakpassword"
+          valueFrom:
+            secretKeyRef:
+              name: iam
+              key: PASSWORD
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
         - name: KEYCLOAK_FRONTEND_URL

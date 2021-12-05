@@ -5,8 +5,8 @@ metadata:
   name: frontend
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   ports:
   - name: 4200tcp-frontend

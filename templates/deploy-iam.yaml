@@ -6,8 +6,8 @@ metadata:
   labels:
     app: iam
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   replicas: 1
   selector:

@@ -6,8 +6,8 @@ metadata:
   name: doyoueventrack-database
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   accessModes:
   - ReadWriteOnce

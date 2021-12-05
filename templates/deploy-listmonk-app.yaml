@@ -6,8 +6,8 @@ metadata:
   labels:
     app: listmonk-app
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   selector:
     matchLabels:

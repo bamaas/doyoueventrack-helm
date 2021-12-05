@@ -6,8 +6,8 @@ metadata:
   labels:
     app: frontend
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   progressDeadlineSeconds: 600
   replicas: 1

@@ -8,8 +8,8 @@ metadata:
     "helm.sh/hook-weight": "-4"
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-    release: {{ .Release.Name }}
-    revision: {{ .Release.Revision }}
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
 spec:
   ports:
   - name: 5432tcp-database

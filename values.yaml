@@ -1,5 +1,5 @@
 landing:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_landing
     pullPolicy: IfNotPresent
@@ -10,7 +10,7 @@ landing:
     host: gymtrack.nl
 
 frontend:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_frontend
     pullPolicy: IfNotPresent
@@ -21,7 +21,7 @@ frontend:
     host: app.gymtrack.nl
 
 backend:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_backend
     pullPolicy: IfNotPresent
@@ -32,7 +32,7 @@ backend:
     host: api.gymtrack.nl
 
 database:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_database
     pullPolicy: IfNotPresent
@@ -46,7 +46,7 @@ database:
     password: postgres
 
 iam:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_iam
     pullPolicy: IfNotPresent

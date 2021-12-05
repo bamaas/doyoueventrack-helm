@@ -6,7 +6,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: {{ .Release.Name }}
-    revision: {{ Release.Revision }}
+    revision: {{ .Release.Revision }}
 spec:
   ports:
   - name: 4200tcp-frontend

@@ -11,12 +11,12 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.listmonk.persistentVolume.capacity }}
-  storageClassName: {{ .Values.listmonk.persistentVolume.storageClassName }}
+      storage: {{ .Values.listmonk.database.persistentVolume.capacity }}
+  storageClassName: {{ .Values.listmonk.database.persistentVolume.storageClassName }}
   volumeMode: Filesystem
 status:
   accessModes:
   - ReadWriteOnce
   capacity:
-    storage: {{ .Values.listmonk.persistentVolume.capacity }}
+    storage: {{ .Values.listmonk.database.persistentVolume.capacity }}
 {{- end }}

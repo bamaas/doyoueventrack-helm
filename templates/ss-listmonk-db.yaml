@@ -22,8 +22,8 @@ spec:
     spec:
       containers:
       - name: listmonk-db
-        image: "{{ .Values.listmonk.image.repository }}:{{ .Values.listmonk.image.tag }}"
-        imagePullPolicy: {{ .Values.listmonk.image.pullPolicy }}
+        image: "{{ .Values.listmonk.database.image.repository }}:{{ .Values.listmonk.database.image.tag }}"
+        imagePullPolicy: {{ .Values.listmonk.database.image.pullPolicy }}
         env:
         - name: POSTGRES_USER
           valueFrom:

@@ -77,8 +77,13 @@ listmonk:
     username: listmonkusername
     password: listmonkpassword
   database:
-    username: listmonkdbusername
-    password: listmonkdbpassword
-  persistentVolume:
-    capacity: 256Mi
-    storageClass: longhorn
+    image:
+      repository: postgres
+      pullPolicy: IfNotPresent
+      tag: "12.5-alpine"
+    credentials:
+      username: listmonkdbusername
+      password: listmonkdbpassword
+    persistentVolume:
+      capacity: 256Mi
+      storageClass: longhorn

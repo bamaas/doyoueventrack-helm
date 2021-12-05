@@ -7,12 +7,12 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
   ports:
-  - name: listmonkport-listmonk
+  - name: http
     port: 9000
     protocol: TCP
     targetPort: 9000
   selector:
-    app: listmonk
+    app: listmonk-app
   sessionAffinity: None
   type: ClusterIP
 {{- end }}

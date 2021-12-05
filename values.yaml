@@ -33,6 +33,7 @@ database:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   persistentVolume:
+    capacity: 512Mi
     storageClassName: longhorn
   credentials:
     username: postgres
@@ -62,11 +63,22 @@ iam:
     ssl: "true"
     user: "smtpServerUser"
 
+# listmonk is a newsletter application 
+# which is used to store users e-mailadresses in as soon as they sign up.
 listmonk:
-  enabled: false
+  enabled: true
   image:
     repository: listmonk/listmonk
     pullPolicy: IfNotPresent
     tag: "v2.0.0"
   ingress:
     host: newsletter.gymtrack.nl
+  adminCredentials:
+    username: listmonkusername
+    password: listmonkpassword
+  database:
+    username: listmonkdbusername
+    password: listmonkdbpassword
+  persistentVolume:
+    capacity: 256Mi
+    storageClass: longhorn

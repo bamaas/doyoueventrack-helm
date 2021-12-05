@@ -1,8 +1,9 @@
+{{- if .Values.listmonk.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   annotations:
-  name: doyoueventrack-database
+  name: listmonk
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
 spec:
@@ -10,11 +11,12 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.database.persistentVolume.capacity }}
-  storageClassName: {{ .Values.database.persistentVolume.storageClassName }}
+      storage: {{ .Values.listmonk.persistentVolume.capacity }}
+  storageClassName: {{ .Values.listmonk.persistentVolume.storageClassName }}
   volumeMode: Filesystem
 status:
   accessModes:
   - ReadWriteOnce
   capacity:
-    storage: {{ .Values.database.persistentVolume.capacity }}
+    storage: {{ .Values.listmonk.persistentVolume.capacity }}
+{{- end }}

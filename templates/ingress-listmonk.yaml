@@ -12,6 +12,6 @@ spec:
       paths:
       - backend:
           serviceName: listmonk
-          servicePort: 9000
+          servicePort: http
         pathType: ImplementationSpecific
 {{- end }}

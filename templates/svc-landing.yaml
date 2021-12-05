@@ -5,6 +5,8 @@ metadata:
   name: landing
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    revision: {{ Release.Revision }}
 spec:
   ports:
   - name: 80tcp-landing

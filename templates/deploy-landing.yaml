@@ -6,6 +6,8 @@ metadata:
   labels:
     app: landing
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    revision: {{ Release.Revision }}
 spec:
   progressDeadlineSeconds: 600
   replicas: 1

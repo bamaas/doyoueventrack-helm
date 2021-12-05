@@ -5,6 +5,8 @@ metadata:
   name: listmonk-db-init
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    revision: {{ Release.Revision }}
   annotations:
     "helm.sh/hook": "pre-install"
     "helm.sh/hook-delete-policy": hook-succeeded

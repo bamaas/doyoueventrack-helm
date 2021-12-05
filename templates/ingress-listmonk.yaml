@@ -5,6 +5,8 @@ metadata:
   name: listmonk
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    revision: {{ Release.Revision }}
 spec:
   rules:
   - host: {{ .Values.listmonk.ingress.host }}

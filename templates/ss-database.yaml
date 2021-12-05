@@ -1,3 +1,4 @@
+{{- if .Values.database.enabled }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -79,3 +80,4 @@ spec:
     type: RollingUpdate
 status:
   replicas: 0
+{{- end }}

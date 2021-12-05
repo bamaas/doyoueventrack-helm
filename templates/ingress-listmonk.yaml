@@ -1,4 +1,4 @@
-﻿{{- if .Values.listmonk.enabled }}
+﻿{{- if and .Values.listmonk.enabled .Values.listmonk.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -11,7 +11,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: listmonk
+          serviceName: listmonk-app
           servicePort: http
         pathType: ImplementationSpecific
 {{- end }}

@@ -1,12 +1,14 @@
-{{- if .Values.listmonk.enabled }}
+{{- if and .Values.listmonk.enabled .Values.listmonk.database.create }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  generation: 1
+  name: listmonk-db
   labels:
     app: listmonk-db
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: listmonk-db
+  annotations:
+    "helm.sh/hook": "pre-install"
+    "helm.sh/hook-weight": "-4"
 spec:
   podManagementPolicy: OrderedReady
   replicas: 1
@@ -75,7 +77,7 @@ spec:
       volumes:
       - name: listmonk
         persistentVolumeClaim:
-          claimName: listmonk
+          claimName: listmonk-db
   updateStrategy:
     type: RollingUpdate
 status:

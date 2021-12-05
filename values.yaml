@@ -1,32 +1,38 @@
 landing:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_landing
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
+    enabled: true
     host: gymtrack.nl
 
 frontend:
+  enabled: false
   image:
     repository: bamaas/fullstackfit_frontend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
+    enabled: true
     host: app.gymtrack.nl
 
 backend:
+  enabled: false
   image:
     repository: bamaas/fullstackfit_backend
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
+    enabled: true
     host: api.gymtrack.nl
 
 database:
+  enabled: false
   image:
     repository: bamaas/fullstackfit_database
     pullPolicy: IfNotPresent
@@ -40,12 +46,14 @@ database:
     password: postgres
 
 iam:
+  enabled: false
   image:
     repository: bamaas/fullstackfit_iam
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   ingress:
+    enabled: true
     host: auth.gymtrack.nl
   adminCredentials:
     username: iamusername
@@ -72,11 +80,16 @@ listmonk:
     pullPolicy: IfNotPresent
     tag: "v2.0.0"
   ingress:
+    enabled: true
     host: newsletter.gymtrack.nl
   adminCredentials:
-    username: listmonkusername
-    password: listmonkpassword
+    username: admin
+    password: admin
   database:
+    # if create is true a new dedicated postgres container will be deployed
+    create: true
+    # if init is true a job will be scheduled to initialize the database 
+    init: true
     image:
       repository: postgres
       pullPolicy: IfNotPresent

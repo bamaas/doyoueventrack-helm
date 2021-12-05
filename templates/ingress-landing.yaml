@@ -1,4 +1,4 @@
-﻿{{- if .Values.landing.enabled }}
+﻿{{- if and .Values.landing.enabled .Values.landing.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:

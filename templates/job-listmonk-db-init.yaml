@@ -26,9 +26,6 @@ spec:
         image: "{{ .Values.listmonk.image.repository }}:{{ .Values.listmonk.image.tag }}"
         command: [sh, -c, "yes | ./listmonk --install"]
         imagePullPolicy: {{ .Values.listmonk.image.pullPolicy }}
-        # envFrom:
-        #   - secretRef:
-        #       name: listmonk
         env:
           - name: LISTMONK_app__address
             valueFrom:

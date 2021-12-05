@@ -100,3 +100,17 @@ listmonk:
     persistentVolume:
       capacity: 256Mi
       storageClass: longhorn
+  smtp:
+    # if init is true a job will be scheduled to import smtp settings through api call
+    init: true
+    image:
+      repository: python
+      pullPolicy: IfNotPresent
+      tag: "slim-buster"
+    host: "smtpServerHost"
+    user: "smtpServerUser"
+    password: "smtpServerPassword"
+    tls: "true"
+    auth: "plain"
+    port: "465"
+    ssl: "true"

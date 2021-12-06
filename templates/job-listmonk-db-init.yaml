@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        job: "listmonk-db-iniit"
+        job: "listmonk-db-init"
     spec:
       restartPolicy: Never
       containers:
-      - name: listmonk-db-iniit
+      - name: listmonk-db-init
         image: "{{ .Values.listmonk.image.repository }}:{{ .Values.listmonk.image.tag }}"
         command: [sh, -c, "yes | ./listmonk --install"]
         imagePullPolicy: {{ .Values.listmonk.image.pullPolicy }}

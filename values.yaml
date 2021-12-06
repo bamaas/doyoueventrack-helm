@@ -1,5 +1,5 @@
 landing:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_landing
     pullPolicy: IfNotPresent
@@ -10,7 +10,7 @@ landing:
     host: gymtrack.nl
 
 frontend:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_frontend
     pullPolicy: IfNotPresent
@@ -21,7 +21,7 @@ frontend:
     host: app.gymtrack.nl
 
 backend:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_backend
     pullPolicy: IfNotPresent
@@ -32,7 +32,7 @@ backend:
     host: api.gymtrack.nl
 
 database:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_database
     pullPolicy: IfNotPresent
@@ -46,7 +46,7 @@ database:
     password: postgres
 
 iam:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_iam
     pullPolicy: IfNotPresent
@@ -89,7 +89,7 @@ listmonk:
     # if create is true a new dedicated postgres container will be deployed
     create: true
     # if init is true a job will be scheduled to initialize the database 
-    init: true
+    init: false
     image:
       repository: postgres
       pullPolicy: IfNotPresent
@@ -100,17 +100,25 @@ listmonk:
     persistentVolume:
       capacity: 256Mi
       storageClass: longhorn
-  smtp:
-    # if init is true a job will be scheduled to import smtp settings through api call
-    init: true
+  settings:
+    # if import is true a job will be scheduled to import smtp settings through api call on installs and upgrades
+    # use with care since this will override settings that has been made through the ui.
+    import: true
     image:
       repository: python
       pullPolicy: IfNotPresent
       tag: "slim-buster"
-    host: "smtpServerHost"
-    user: "smtpServerUser"
-    password: "smtpServerPassword"
-    tls: "true"
-    auth: "plain"
-    port: "465"
-    ssl: "true"
+    general:
+      # Default `from` e-mail to show on outgoing campaign e-mails. 
+      defaultFromEmail: "listmonk <noreply@listmonk.yoursite.com>"
+      # list of e-mail addresses to which admin notifications such as import updates, campaign completion, failure etc. should be sent.
+      adminNotificationEmails: 
+        - admin@listmonk.yoursite.com
+    smtp:
+      host: "smtpServerHost"
+      port: "465"
+      username: "smtpServerUser"
+      password: "smtpServerPassword"
+      authProtocol: "plain"
+      tls: "true"
+      skipTlsVerification: "false"

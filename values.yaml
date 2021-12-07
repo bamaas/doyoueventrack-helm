@@ -107,7 +107,7 @@ listmonk:
     image:
       repository: bamaas/listmonk_import
       pullPolicy: IfNotPresent
-      tag: "v1.0.2"
+      tag: "v1.0.9"
     general:
       # Default `from` e-mail to show on outgoing campaign e-mails. 
       defaultFromEmail: "listmonk <noreply@listmonk.yoursite.com>"
@@ -117,7 +117,7 @@ listmonk:
     smtp:
       host: "smtpServerHost"
       port: "465"
-      username: "smtpServerUser"
+      username: "basssieee"
       password: "smtpServerPassword"
       authProtocol: "plain"
       tlsEnabled: "true"

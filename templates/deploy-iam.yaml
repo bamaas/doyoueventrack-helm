@@ -29,6 +29,7 @@ spec:
             IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
             sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             sed -i "s/thiswillebereplaced/bythis/g" /tmp/realm-export.json
+            /opt/jboss/keycloak/bin/add-user-keycloak.sh -r FitTrack -u {{ .Values.iam.initialApplicationUser.username }} -p {{ .Values.iam.initialApplicationUser.password }}
             /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0
         env:
         - name: KEYCLOAK_USER

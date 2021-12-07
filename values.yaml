@@ -1,5 +1,5 @@
 landing:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_landing
     pullPolicy: IfNotPresent
@@ -10,7 +10,7 @@ landing:
     host: gymtrack.nl
 
 frontend:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_frontend
     pullPolicy: IfNotPresent
@@ -21,7 +21,7 @@ frontend:
     host: app.gymtrack.nl
 
 backend:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_backend
     pullPolicy: IfNotPresent
@@ -32,7 +32,7 @@ backend:
     host: api.gymtrack.nl
 
 database:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_database
     pullPolicy: IfNotPresent
@@ -46,7 +46,7 @@ database:
     password: postgres
 
 iam:
-  enabled: false
+  enabled: true
   image:
     repository: bamaas/fullstackfit_iam
     pullPolicy: IfNotPresent
@@ -55,9 +55,14 @@ iam:
   ingress:
     enabled: true
     host: auth.gymtrack.nl
+  # keycloak admin credentials
   adminCredentials:
     username: iamusername
     password: iampassword
+  # this user will be created upon deployment and can be used to log into the Do You Even Track application.
+  initialApplicationUser:
+    username: changeme
+    password: changeme
   smtpServer:
     password: "smtpServerPassword"
     replyToDisplayName: "No-reply | FitTrack"
@@ -110,14 +115,14 @@ listmonk:
       tag: "v1.0.9"
     general:
       # Default `from` e-mail to show on outgoing campaign e-mails. 
-      defaultFromEmail: "listmonk <noreply@listmonk.yoursite.com>"
+      defaultFromEmail: "bas <noreply@listmonk.yoursite.com>"
       # list of e-mail addresses to which admin notifications such as import updates, campaign completion, failure etc. should be sent.
       adminNotificationEmails: 
         - admin@listmonk.yoursite.com
     smtp:
       host: "smtpServerHost"
       port: "465"
-      username: "basssieee"
+      username: "ditiseentest"
       password: "smtpServerPassword"
       authProtocol: "plain"
       tlsEnabled: "true"

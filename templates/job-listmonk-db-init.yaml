@@ -30,46 +30,46 @@ spec:
           - name: LISTMONK_app__address
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: APP_ADDRESS
           - name: LISTMONK_app__admin_password
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: APP_ADMIN_PASSWORD
           - name: LISTMONK_app__admin_username
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: APP_ADMIN_USERNAME
           - name: LISTMONK_db__database
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_DATABASE
           - name: LISTMONK_db__db
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_DB
           - name: LISTMONK_db__host
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_HOST
           - name: LISTMONK_db__password
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_PASSWORD
           - name: LISTMONK_db__ssl_mode
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_SSL_MODE
           - name: LISTMONK_db__user
             valueFrom:
               secretKeyRef:
-                name: listmonk
+                name: listmonk-env-vars
                 key: DB_USER
 {{ end }}

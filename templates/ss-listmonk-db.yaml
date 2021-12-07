@@ -32,12 +32,12 @@ spec:
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
-              name: listmonk
+              name: listmonk-env-vars
               key: DB_USER
         - name: POSTGRES_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: listmonk
+              name: listmonk-env-vars
               key: DB_PASSWORD
         livenessProbe:
           failureThreshold: 3

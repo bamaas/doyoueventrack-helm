@@ -89,7 +89,7 @@ listmonk:
     # if create is true a new dedicated postgres container will be deployed
     create: true
     # if init is true a job will be scheduled to initialize the database 
-    init: false
+    init: true
     image:
       repository: postgres
       pullPolicy: IfNotPresent
@@ -105,9 +105,9 @@ listmonk:
     # use with care since this will override settings that has been made through the ui.
     import: true
     image:
-      repository: python
+      repository: bamaas/listmonk_import
       pullPolicy: IfNotPresent
-      tag: "slim-buster"
+      tag: "v1.0.2"
     general:
       # Default `from` e-mail to show on outgoing campaign e-mails. 
       defaultFromEmail: "listmonk <noreply@listmonk.yoursite.com>"
@@ -120,5 +120,5 @@ listmonk:
       username: "smtpServerUser"
       password: "smtpServerPassword"
       authProtocol: "plain"
-      tls: "true"
+      tlsEnabled: "true"
       skipTlsVerification: "false"

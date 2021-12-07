@@ -36,9 +36,9 @@ spec:
             IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
             FRONTEND_URL=$(echo {{ .Values.frontend.ingress.host }} | sed 's/\./\\./g')
             BACKEND_URL=$(echo {{ .Values.backend.ingress.host }} | sed 's/\./\\./g')
-            # find /usr/share/nginx/html/*.js -type f -exec sed -i "s/api\.doyoueventrack\.app/${BACKEND_URL}/g" {} \;
-            # find /usr/share/nginx/html/*.js -type f -exec sed -i "s/bro\.doyoueventrack\.app/${FRONTEND_URL}/g" {} \;
-            # find /usr/share/nginx/html/*.js -type f -exec sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" {} \;
+            find /usr/share/nginx/html/*.js -type f -exec sed -i "s/api\.doyoueventrack\.app/${BACKEND_URL}/g" {} \;
+            find /usr/share/nginx/html/*.js -type f -exec sed -i "s/bro\.doyoueventrack\.app/${FRONTEND_URL}/g" {} \;
+            find /usr/share/nginx/html/*.js -type f -exec sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" {} \;
             sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf 
             nginx -g 'daemon off;'
         env:
@@ -50,7 +50,7 @@ spec:
             path: /
             port: 4200
             scheme: HTTP
-          initialDelaySeconds: 20
+          initialDelaySeconds: 60
           periodSeconds: 2
           successThreshold: 1
           timeoutSeconds: 2
@@ -71,7 +71,7 @@ spec:
             path: /
             port: 4200
             scheme: HTTP
-          initialDelaySeconds: 20
+          initialDelaySeconds: 60
           periodSeconds: 2
           successThreshold: 2
           timeoutSeconds: 2

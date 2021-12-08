@@ -9,7 +9,7 @@ metadata:
     revision: "{{ .Release.Revision }}"
 spec:
   ports:
-  - name: 80tcp-landing
+  - name: http
     port: 80
     protocol: TCP
     targetPort: 80

@@ -9,7 +9,7 @@ metadata:
     revision: "{{ .Release.Revision }}"
 spec:
   ports:
-  - name: 4200tcp-frontend
+  - name: http
     port: 4200
     protocol: TCP
     targetPort: 4200

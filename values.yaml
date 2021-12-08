@@ -52,14 +52,16 @@ iam:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
+  # The title that will be shown on the login/register pages
+  loginTitle: "GymTrack"
   ingress:
     enabled: true
     host: auth.gymtrack.nl
-  # keycloak admin credentials
+  # iam admin credentials
   adminCredentials:
     username: iamusername
     password: iampassword
-  # this user will be created upon deployment and can be used to log into the Do You Even Track application.
+  # this user will be created upon installation
   initialApplicationUser:
     username: changeme
     password: changeme

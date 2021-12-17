@@ -63,8 +63,8 @@ iam:
     password: iampassword
   # this user will be created upon installation
   initialApplicationUser:
-    username: changeme
-    password: changeme
+    username: lol
+    password: lol
   smtpServer:
     password: "smtpServerPassword"
     replyToDisplayName: "No-reply | FitTrack"

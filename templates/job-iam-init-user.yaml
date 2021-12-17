@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: iam-init-user
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: "{{ .Release.Name }}"
+    revision: "{{ .Release.Revision }}"
+  annotations:
+    "helm.sh/hook": "post-install, post-upgrade"
+    "helm.sh/hook-delete-policy": "hook-succeeded, hook-failed"
+    "helm.sh/hook-weight": "0"
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 60
+  activeDeadlineSeconds: 100
+  template:
+    metadata:
+      labels:
+        job: "iam-init-user"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: iam-init-user
+        image: "{{ .Values.iam.image.repository }}:{{ .Values.iam.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.iam.image.pullPolicy }}
+        command: 
+          - sh
+          - -c
+          - |
+            until $(curl --output /dev/null --silent --head --fail http://iam:8080); do
+                print 'waiting for connection...'
+                sleep 5
+            done
+            /opt/jboss/keycloak/bin/kcadm.sh config credentials --server http://iam:8080/auth --realm master --user ${KEYCLOAK_USER} --password ${KEYCLOAK_PASSWORD}
+            /opt/jboss/keycloak/bin/kcadm.sh create users -r FitTrack -s username=${DOYOUEVENTRACK_USERNAME} -s enabled=true
+            /opt/jboss/keycloak/bin/kcadm.sh set-password -r FitTrack --username ${DOYOUEVENTRACK_USERNAME} --new-password ${DOYOUEVENTRACK_PASSWORD}
+        envFrom:
+          - secretRef:
+              name: iam-credentials

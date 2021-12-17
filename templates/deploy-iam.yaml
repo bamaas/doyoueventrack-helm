@@ -30,35 +30,13 @@ spec:
             LOGIN_TITLE=$(echo {{ .Values.iam.loginTitle }} | sed 's/\./\\./g')
             sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             sed -i "s/Do You Even Track/${LOGIN_TITLE}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
-            /opt/jboss/keycloak/bin/add-user-keycloak.sh -r FitTrack -u {{ .Values.iam.initialApplicationUser.username }} -p {{ .Values.iam.initialApplicationUser.password }}
-            /opt/jboss/keycloak/bin/kcadm.sh update realms/FitTrack --server http://localhost:8080/auth --realm master --user {{ .Values.iam.adminCredentials.username }} --password {{ .Values.iam.adminCredentials.password }} -f - << EOF
-            {"smtpServer" : {
-                "password" : "iets",
-                "replyToDisplayName" : "iets | FitTrack",
-                "starttls" : "true",
-                "auth" : "true",
-                "port" : "465",
-                "host" : "smtpServerHost",
-                "replyTo" : "no-reply@basmaas.nl",
-                "from" : "no-reply@basmaas.nl",
-                "fromDisplayName" : "FitTrack",
-                "ssl" : "true",
-                "user" : "smtpServerUser"
-              }
-            }
-            EOF
+            /opt/jboss/keycloak/bin/add-user-keycloak.sh -r FitTrack -u ${DOYOUEVENTRACK_USERNAME} -p ${DOYOUEVENTRACK_PASSWORD}
+            /opt/jboss/keycloak/bin/kcadm.sh update realms/FitTrack --server http://localhost:8080/auth --realm master --user ${KEYCLOAK_USER} --password ${KEYCLOAK_PASSWORD} -f /mnt/smtp.json
             /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0
+        envFrom:
+        - secretRef:
+            name: iam-credentials
         env:
-        - name: KEYCLOAK_USER
-          valueFrom:
-            secretKeyRef:
-              name: iam
-              key: USERNAME
-        - name: KEYCLOAK_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: iam
-              key: PASSWORD
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
         - name: KEYCLOAK_FRONTEND_URL
@@ -98,4 +76,12 @@ spec:
             cpu: "100m"
           limits:
             memory: "350Mi"
+        volumeMounts:
+        - mountPath: "/mnt/"
+          name: iam-smtp
+          readOnly: true
+      volumes:
+      - name: iam-smtp
+        secret:
+          secretName: iam-smtp-settings
 {{- end }}

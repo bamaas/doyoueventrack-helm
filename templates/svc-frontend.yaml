@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: doyoueventrack-frontend
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
@@ -14,7 +14,7 @@ spec:
     protocol: TCP
     targetPort: 4200
   selector:
-    app: frontend
+    app: doyoueventrack-frontend
   sessionAffinity: None
   type: ClusterIP
 {{- end }}

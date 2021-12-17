@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: landing
+  name: doyoueventrack-landing
   labels:
-    app: landing
+    app: doyoueventrack-landing
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     revision: "{{ .Release.Revision }}"
@@ -14,7 +14,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: landing
+      app: doyoueventrack-landing
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        app: landing
+        app: doyoueventrack-landing
     spec:
       containers:
       - image: "{{ .Values.landing.image.repository }}:{{ .Values.landing.image.tag | default .Chart.AppVersion }}"

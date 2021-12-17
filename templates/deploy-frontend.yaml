@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: doyoueventrack-frontend
   labels:
-    app: frontend
+    app: doyoueventrack-frontend
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     revision: "{{ .Release.Revision }}"
@@ -14,7 +14,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: frontend
+      app: doyoueventrack-frontend
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        app: frontend
+        app: doyoueventrack-frontend
     spec:
       containers:
       - name: frontend

@@ -9,12 +9,12 @@ metadata:
     revision: "{{ .Release.Revision }}"
 spec:
   ports:
-  - name: backendport-backend
+  - name: http
     port: 5000
     protocol: TCP
     targetPort: 5000
   selector:
-    app: backend
+    app: doyoueventrack-backend
   sessionAffinity: None
   type: ClusterIP
 {{- end }}

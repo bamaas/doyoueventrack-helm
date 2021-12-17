@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: frontend
+  name: doyoueventrack-frontend
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: frontend
+          serviceName: doyoueventrack-frontend
           servicePort: http
         pathType: ImplementationSpecific
 {{- end }}

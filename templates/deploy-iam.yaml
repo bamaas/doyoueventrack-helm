@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: iam
+  name: doyoueventrack-iam
   labels:
-    app: iam
+    app: doyoueventrack-iam
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     revision: "{{ .Release.Revision }}"
@@ -12,11 +12,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: iam
+      app: doyoueventrack-iam
   template:
     metadata:
       labels:
-        app: iam
+        app: doyoueventrack-iam
     spec:
       containers:
       - name: iam
@@ -35,7 +35,7 @@ spec:
             /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0
         envFrom:
         - secretRef:
-            name: iam-credentials
+            name: doyoueventrack-iam-credentials
         env:
         - name: PROXY_ADDRESS_FORWARDING
           value: "true"
@@ -46,15 +46,15 @@ spec:
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: database
+              name: doyoueventrack-database
               key: USERNAME
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: database
+              name: doyoueventrack-database
               key: PASSWORD
         - name: DB_ADDR
-          value: "database"
+          value: "doyoueventrack-database"
         - name: DB_PORT
           value: "5432"
         - name: DB_DATABASE
@@ -83,5 +83,5 @@ spec:
       volumes:
       - name: iam-smtp
         secret:
-          secretName: iam-smtp-settings
+          secretName: doyoueventrack-iam-smtp-settings
 {{- end }}

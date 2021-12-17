@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: database
+  name: doyoueventrack-database
   labels:
-    app: database
+    app: doyoueventrack-database
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     revision: "{{ .Release.Revision }}"
@@ -17,12 +17,12 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: database
+      app: doyoueventrack-database
   serviceName: database
   template:
     metadata:
       labels:
-        app: database
+        app: doyoueventrack-database
     spec:
       containers:
       - image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag | default .Chart.AppVersion }}"

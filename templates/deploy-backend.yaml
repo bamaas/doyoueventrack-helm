@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: doyoueventrack-backend
   labels:
-    app: backend
+    app: doyoueventrack-backend
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
     release: "{{ .Release.Name }}"
     revision: "{{ .Release.Revision }}"
@@ -14,7 +14,7 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: backend
+      app: doyoueventrack-backend
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        app: backend
+        app: doyoueventrack-backend
     spec:
       containers:
       - image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"

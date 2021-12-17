@@ -31,6 +31,22 @@ spec:
             sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             sed -i "s/Do You Even Track/${LOGIN_TITLE}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             /opt/jboss/keycloak/bin/add-user-keycloak.sh -r FitTrack -u {{ .Values.iam.initialApplicationUser.username }} -p {{ .Values.iam.initialApplicationUser.password }}
+            /opt/jboss/keycloak/bin/kcadm.sh update realms/FitTrack --server http://localhost:8080/auth --realm master --user {{ .Values.iam.adminCredentials.username }} --password {{ .Values.iam.adminCredentials.password }} -f - << EOF
+            {"smtpServer" : {
+                "password" : "iets",
+                "replyToDisplayName" : "iets | FitTrack",
+                "starttls" : "true",
+                "auth" : "true",
+                "port" : "465",
+                "host" : "smtpServerHost",
+                "replyTo" : "no-reply@basmaas.nl",
+                "from" : "no-reply@basmaas.nl",
+                "fromDisplayName" : "FitTrack",
+                "ssl" : "true",
+                "user" : "smtpServerUser"
+              }
+            }
+            EOF
             /opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0
         env:
         - name: KEYCLOAK_USER

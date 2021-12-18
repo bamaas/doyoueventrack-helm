@@ -70,14 +70,13 @@ database:
     enabled: false
     capacity: 512Mi
     storageClassName: longhorn
-  # Leave credentials empty to auto-generate.
   credentials:
-    username: ""
-    password: ""
+    username: "changme"
+    password: "changeme"
   resources:
     requests:
-      memory: "60Mi"
-      cpu: "100m"
+      memory: "50Mi"
+      cpu: "90m"
     limits:
       memory: "300Mi"
       cpu: "300m"
@@ -92,10 +91,10 @@ iam:
   ingress:
     enabled: true
     host: auth.gymtrack.nl
-  # Admin user to manage the iam system. Leave empty to auto-generate.
+  # Admin user to manage the iam system.
   credentials:
-    username: ""
-    password: ""
+    username: "changeme"
+    password: "changeme"
   smtpServer:
     password: "smtpServerPassword"
     replyToDisplayName: "No-reply | FitTrack"

@@ -4,7 +4,7 @@ initialUser:
   password: changeme
 
 landing:
-  enabled: true
+  enabled: false
   image:
     repository: bamaas/fullstackfit_landing
     pullPolicy: IfNotPresent
@@ -23,7 +23,7 @@ frontend:
     tag: ""
   ingress:
     enabled: true
-    host: app.gymtrack.nl
+    host: gymtrack.nl
 
 backend:
   enabled: true
@@ -44,6 +44,7 @@ database:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
   persistentVolume:
+    enabled: false
     capacity: 512Mi
     storageClassName: longhorn
   credentials:

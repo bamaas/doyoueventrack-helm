@@ -28,7 +28,7 @@ spec:
           - sh
           - -c
           - |
-            until $(curl --output /dev/null --silent --head --fail http://doyoueventrack-iam:8080); do
+            until $(curl --output /dev/null --silent --head --fail http://doyoueventrack-iam:8080/auth/realms/master); do
                 echo 'waiting for connection...'
                 sleep 5
             done

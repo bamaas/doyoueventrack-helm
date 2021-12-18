@@ -60,18 +60,20 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         tty: true
-        volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: doyoueventrack-database
-          subPath: doyoueventrack
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
+      {{- if .Values.database.persistentVolume.enabled }}
+      volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: doyoueventrack-database
+          subPath: doyoueventrack
       volumes:
       - name: doyoueventrack-database
         persistentVolumeClaim:
           claimName: doyoueventrack-database
+      {{- end }}
   updateStrategy:
     type: RollingUpdate
 status:

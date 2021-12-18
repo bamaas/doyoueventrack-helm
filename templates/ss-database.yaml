@@ -25,19 +25,12 @@ spec:
         app: doyoueventrack-database
     spec:
       containers:
-      - image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag | default .Chart.AppVersion }}"
+      - name: database
+        image: "{{ .Values.database.image.repository }}:{{ .Values.database.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.database.image.pullPolicy }}
-        env:
-        - name: POSTGRES_USER
-          valueFrom:
-            secretKeyRef:
-              name: database
-              key: USERNAME
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: database
-              key: PASSWORD
+        envFrom:
+        - secretRef:
+            name: doyoueventrack-database
         livenessProbe:
           failureThreshold: 3
           initialDelaySeconds: 20
@@ -46,7 +39,6 @@ spec:
           tcpSocket:
             port: 5432
           timeoutSeconds: 2
-        name: database
         ports:
         - containerPort: 5432
           name: 5432tcp

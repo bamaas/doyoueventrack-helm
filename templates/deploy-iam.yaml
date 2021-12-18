@@ -47,18 +47,21 @@ spec:
           valueFrom:
             secretKeyRef:
               name: doyoueventrack-database
-              key: USERNAME
+              key: POSTGRES_USER
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: doyoueventrack-database
-              key: PASSWORD
+              key: POSTGRES_PASSWORD
         - name: DB_ADDR
           value: "doyoueventrack-database"
         - name: DB_PORT
           value: "5432"
         - name: DB_DATABASE
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: doyoueventrack-database
+              key: POSTGRES_DB
         - name: DB_SCHEMA
           value: "iam"
         ports:

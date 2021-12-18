@@ -26,7 +26,8 @@ spec:
         app: doyoueventrack-backend
     spec:
       containers:
-      - image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+      - name: backend
+        image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 4
@@ -36,7 +37,28 @@ spec:
           tcpSocket:
             port: 5000
           timeoutSeconds: 3
-        name: backend
+        env:
+        - name: KEYCLOAK_AUTH_SERVER_URL
+          value: http://doyoueventrack-iam:8080/auth
+        - name: DATABASE_HOST
+          value: "doyoueventrack-database"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_DB
+          valueFrom:
+            secretKeyRef:
+              name: doyoueventrack-database
+              key: POSTGRES_DB
+        - name: DATABASE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: doyoueventrack-database
+              key: POSTGRES_USER
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: doyoueventrack-database
+              key: POSTGRES_PASSWORD
         resources:
           requests:
             memory: "300Mi"

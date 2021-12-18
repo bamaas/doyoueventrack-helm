@@ -1,3 +1,5 @@
+# The title that will be shown on the login/register pages
+loginTitle: "GymTrack"
 # This user will be created upon installation
 initialUser:
   username: changeme
@@ -13,6 +15,13 @@ landing:
   ingress:
     enabled: true
     host: gymtrack.nl
+  resources:
+    requests:
+      memory: "5Mi"
+      cpu: "5m"
+    limits:
+      memory: "50Mi"
+      cpu: "10m"
 
 frontend:
   enabled: true
@@ -24,6 +33,13 @@ frontend:
   ingress:
     enabled: true
     host: gymtrack.nl
+  resources:
+    requests:
+      memory: "5Mi"
+      cpu: "3m"
+    limits:
+      memory: "50Mi"
+      cpu: "10m"
 
 backend:
   enabled: true
@@ -35,6 +51,13 @@ backend:
   ingress:
     enabled: true
     host: api.gymtrack.nl
+  resources:
+    requests:
+      memory: "300Mi"
+      cpu: "50m"
+    limits:
+      memory: "500Mi"
+      cpu: "500m"
 
 database:
   enabled: true
@@ -47,9 +70,17 @@ database:
     enabled: false
     capacity: 512Mi
     storageClassName: longhorn
+  # Leave credentials empty to auto-generate.
   credentials:
-    username: postgres
-    password: postgres
+    username: ""
+    password: ""
+  resources:
+    requests:
+      memory: "60Mi"
+      cpu: "100m"
+    limits:
+      memory: "300Mi"
+      cpu: "300m"
 
 iam:
   enabled: true
@@ -58,15 +89,13 @@ iam:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-  # The title that will be shown on the login/register pages
-  loginTitle: "GymTrack"
   ingress:
     enabled: true
     host: auth.gymtrack.nl
-  # admin user to manage the iam system
-  adminCredentials:
-    username: iamusername
-    password: iampassword
+  # Admin user to manage the iam system. Leave empty to auto-generate.
+  credentials:
+    username: ""
+    password: ""
   smtpServer:
     password: "smtpServerPassword"
     replyToDisplayName: "No-reply | FitTrack"
@@ -79,3 +108,10 @@ iam:
     fromDisplayName: "FitTrack"
     ssl: "true"
     user: "smtpServerUser"
+  resources:
+    requests:
+      memory: "200Mi"
+      cpu: "100m"
+    limits:
+      memory: "350Mi"
+      cpu: "2000m"

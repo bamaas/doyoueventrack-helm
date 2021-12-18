@@ -48,11 +48,11 @@ spec:
         name: landing
         resources:
           requests:
-            memory: "5Mi"
-            cpu: "5m"
+            memory: "{{ .Values.landing.resources.requests.memory }}"
+            cpu: "{{ .Values.landing.resources.requests.cpu }}"
           limits:
-            memory: "50Mi"
-            cpu: "10m"
+            memory: "{{ .Values.landing.resources.limits.memory }}"
+            cpu: "{{ .Values.landing.resources.limits.cpu }}"
         ports:
         - containerPort: 80
           name: landing80tcp

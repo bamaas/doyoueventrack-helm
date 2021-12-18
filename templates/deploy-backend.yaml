@@ -61,11 +61,11 @@ spec:
               key: POSTGRES_PASSWORD
         resources:
           requests:
-            memory: "300Mi"
-            cpu: "50m"
+            memory: "{{ .Values.backend.resources.requests.memory }}"
+            cpu: "{{ .Values.backend.resources.requests.cpu }}"
           limits:
-            memory: "500Mi"
-            cpu: "500m"
+            memory: "{{ .Values.backend.resources.limits.memory }}"
+            cpu: "{{ .Values.backend.resources.limits.cpu }}"
         ports:
         - containerPort: 5000
           name: backendport

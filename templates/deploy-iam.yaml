@@ -27,7 +27,7 @@ spec:
           - -c
           - |
             IAM_URL=$(echo {{ .Values.iam.ingress.host }} | sed 's/\./\\./g')
-            LOGIN_TITLE=$(echo {{ .Values.iam.loginTitle }} | sed 's/\./\\./g')
+            LOGIN_TITLE=$(echo {{ .Values.loginTitle }} | sed 's/\./\\./g')
             sed -i "s/auth\.doyoueventrack\.app/${IAM_URL}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             sed -i "s/Do You Even Track/${LOGIN_TITLE}/g" /opt/jboss/keycloak/themes/FitTrack/login/template.ftl
             /opt/jboss/keycloak/bin/add-user-keycloak.sh -r FitTrack -u ${DOYOUEVENTRACK_USERNAME} -p ${DOYOUEVENTRACK_PASSWORD}
@@ -75,10 +75,11 @@ spec:
             port: 8080
         resources:
           requests:
-            memory: "200Mi"
-            cpu: "100m"
+            memory: "{{ .Values.iam.resources.requests.memory }}"
+            cpu: "{{ .Values.iam.resources.requests.cpu }}"
           limits:
-            memory: "350Mi"
+            memory: "{{ .Values.iam.resources.limits.memory }}"
+            cpu: "{{ .Values.iam.resources.limits.cpu }}"
         volumeMounts:
         - mountPath: "/mnt/"
           name: iam-smtp

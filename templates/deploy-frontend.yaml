@@ -56,14 +56,14 @@ spec:
           timeoutSeconds: 2
         resources:
           requests:
-            memory: "5Mi"
-            cpu: "5m"
+            memory: "{{ .Values.frontend.resources.requests.memory }}"
+            cpu: "{{ .Values.frontend.resources.requests.cpu }}"
           limits:
-            memory: "50Mi"
-            cpu: "10m"
+            memory: "{{ .Values.frontend.resources.limits.memory }}"
+            cpu: "{{ .Values.frontend.resources.limits.cpu }}"
         ports:
         - containerPort: 4200
-          name: 4200tcp327341
+          name: http
           protocol: TCP
         readinessProbe:
           failureThreshold: 3

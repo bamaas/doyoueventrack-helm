@@ -1,5 +1,5 @@
 # The title that will be shown on the login/register pages
-loginTitle: "GymTrack"
+loginTitle: "DoYouEvenTrack"
 # This user will be created upon installation
 initialUser:
   username: changeme
